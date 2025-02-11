@@ -102,8 +102,16 @@ onMounted(() => {
     
     // 添加轨道控制器
     const controls = new OrbitControls(camera, renderer.domElement);
-    camera.position.set(5, 5, 5);
-    controls.update();
+    controls.autoRotate = true
+    controls.autoRotateSpeed = 5
+    camera.position.set(5, 2, 1);
+    camera.lookAt(1,1,0)
+   
+
+//坐标辅助器
+const axesHelper = new THREE.AxesHelper( 5 );
+scene.add( axesHelper );
+
 
     // 初始化光线投射
     const raycaster = new THREE.Raycaster();
@@ -167,7 +175,9 @@ onMounted(() => {
     // 动画循环
     function animate() {
         requestAnimationFrame(animate);
+        controls.update();//必须放在动画循环里面
         renderer.render(scene, camera);
+      
     }
     animate();
 })
