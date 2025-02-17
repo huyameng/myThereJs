@@ -3,7 +3,7 @@
 </template>
 
 <script setup>
-import { onMounted, onBeforeUnmount, ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
@@ -12,7 +12,13 @@ const threeContainer = ref(null);
 
 
 onMounted(() => {
+    /* 
+    PointLight 点光源，由一个点开始沿着这个点的各个方向发散的光 ( 灯泡发出的光 )
 
+DirectionalLight 平行光，只沿着一个方向照射不会发散的光源 ( 一般用来模拟太阳直射 )
+
+SpotLightHelper 聚光源，有一个点沿着一个方向带有一定发散角度的光 （ 舞台的聚光灯）
+    */
     // 初始化场景、相机、渲染器
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
